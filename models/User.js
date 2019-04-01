@@ -14,7 +14,7 @@ const UserSchema = new Schema({
         required : true
     },
     phone:{
-        type : Number
+       type : Number
     },
     date: {
         type: Date,

@@ -24,10 +24,6 @@ connection.once('open',function(){
 
 
 
-// mongoose
-//     .connect(mongoURI,{useNewUrlParser : true})
-//     .then(()=>console.log("MongoDB connected"))
-//     .catch(err => console.log(err))
 
 var Users = require('./routes/Users')
 
