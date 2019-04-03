@@ -52,8 +52,8 @@ users.post('/registerr',(req,res) => {
     })
 })
 
-users.post('/loginnn',(req,res) => {
-    // res.send('Loging Route is Working')
+users.post('/loginj',(req,res) => {
+    // res.send('hi')
     User.findOne({
         email : req.body.email
     })
