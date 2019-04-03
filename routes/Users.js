@@ -17,7 +17,7 @@ users.use(cors())
 
 process.env.SECRET_KEY = 'secret'
 
-users.post('/register',(req,res) => {
+users.post('/registerr',(req,res) => {
     const today = new Date();
 
     const userData = {
@@ -53,7 +53,39 @@ users.post('/register',(req,res) => {
 })
 
 users.post('/loginnn',(req,res) => {
-    res.send('Loging Route is Working')
-})
+    // res.send('Loging Route is Working')
+    User.findOne({
+        email : req.body.email
+    })
+    .then(user => {
 
+        if(user){
+
+            if(bcryptjs.compareSync(req.body.password,user.password)){
+                
+                const payload = {
+                    _id : user._id,
+                    first_name : user.first_name,
+                    last_name : user.last_name,
+                    email : user.email,
+                    phone : user.phone
+                }
+    
+                let token = jwt.sign(payload,process.env.SECRET_KEY,{
+                    expiresIn : 1440 
+                })
+
+                res.send(token)
+            }else{
+                res.json({error : 'User does not exist'})
+            }
+
+        }else{
+            res.json({error : 'User does not exist'})
+        }
+    })
+    .catch(err => {
+        res.send('error' + err)
+    })
+})
 module.exports = users
